@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["halfields"]
   spec.email         = ["hfields697@aol.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Gives records and}
+  spec.description   = %q{Shows the league and overall basketball records for the men's teams in the Southeastern Conference. Pick a team and see its complete 2017-1018 schedule}
+  spec.homepage      = ""
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -32,4 +32,9 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "pry"
+
+  # spec.add_dependency "require_all"
+  spec.add_dependency "nokogiri"
+
 end
