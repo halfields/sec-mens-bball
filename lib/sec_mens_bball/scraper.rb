@@ -1,8 +1,8 @@
-require 'open-uri'
+crequire 'open-uri'
 
 class Scraper
 
-	def scrape_standings_page		
+	def self.scrape_standings_page		
 		doc = Nokogiri::HTML(open("http://www.secsports.com/standings/mens-basketball"))
 		standings = doc.css("#wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody")
 		league = []
@@ -11,12 +11,12 @@ class Scraper
 			t.name = team_table.css("a:first").text
 			t.url =  team_table.css("a:first").attr("href").text.strip
 			t.conf_record = team_table.css("#wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody > tr:nth-child(1) > td:nth-child(3)")
-			t.overall_record = team_table.css("#wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody > tr:nth-child(1) > td:nth-child(3)
+			t.overall_record = team_table.css("#wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody > tr:nth-child(1) > td:nth-child(3)")
 			scrape_team_page(t.url)
 		end
 	end
 
-	def scrape_team_page(url)
+	def self.scrape_team_page(url)
 	#	binding.pry
 		schedule_url =  ("http://www.secsports.com" + url).gsub("clubhouse", "schedule")
 		doc = Nokogiri::HTML(open(schedule_url))

@@ -22,3 +22,4 @@ class SecMensBball::CLI
 		Scraper.scrape_standings_page
 	end
 end
+
