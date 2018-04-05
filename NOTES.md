@@ -23,10 +23,11 @@ The welcome page presents a table of 14 SEC basketball teams and their data scra
 
 	School name, conference record, and overall record are scraped from the website and added to an array of hashes. The numerical ranking is computed from the index of each school entry:
 		standings = [
-			{team => {ranking => x},
+			{team =>
 				     {school name => xxx},
 				     {conference record => xxx},
-				     {overall record => xxx}
+				     {overall record => xxx},
+				     {team schedule page => url}
 				     },
 			   ...	     
 			 ]
