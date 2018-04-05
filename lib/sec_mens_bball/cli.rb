@@ -3,6 +3,7 @@ class SecMensBball::CLI
 	def call
 		welcome
 		display
+		choose
 	end
 	
 
@@ -15,11 +16,18 @@ class SecMensBball::CLI
 		puts "Welcome to my Southeastern Conference Mens Basketball site."
 		puts "Here are the current league standings."
 		puts
-		puts "			Team						League Record						Overall Record"
+		puts "   No.    		Team						   League Record			Overall Record"
 	end
 
 	def display
-		Scraper.scrape_standings_page
+		puts " League record data " # Scraper.scrape_standings_page
 	end
+
+	def choose
+		puts
+		input = ""
+		until input = "exit"
+		  puts "Enter a team's number to see its schedule or type exit to leave site"
+		  input = gets.strip
 end
 

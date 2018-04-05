@@ -1,10 +1,13 @@
-crequire 'open-uri'
+require 'open-uri'
+require 'nokogiri'
+require 'pry'
 
 class Scraper
 
 	def self.scrape_standings_page		
 		doc = Nokogiri::HTML(open("http://www.secsports.com/standings/mens-basketball"))
 		standings = doc.css("#wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody")
+		binding.pry
 		league = []
 		standings.css("tr").each do |team_table|
 			t = Team.new
@@ -28,7 +31,7 @@ class Scraper
 			names << o.name
 		end
 		names
-		binding.pry
+	#	binding.pry
 	end
 
 end

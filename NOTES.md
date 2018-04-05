@@ -14,3 +14,19 @@ user types: bball
 			yes returns to the welcome site
 		-"Would you like to leave this site: Type exit and press ENTER"
 			exit causes you to exit the site
+
+The welcome page presents a table of 14 SEC basketball teams and their data scraped from "http://www.secsports.com/standings/mens-basketball" using the 'scrape_standings_page'	class method. It will provide the following data:
+	- numerical ranking in the 2018 standings
+	- school name
+	- conference record
+	-overall record
+
+	School name, conference record, and overall record are scraped from the website and added to an array of hashes. The numerical ranking is computed from the index of each school entry:
+		standings = [
+			{team => {ranking => x},
+				     {school name => xxx},
+				     {conference record => xxx},
+				     {overall record => xxx}
+				     },
+			   ...	     
+			 ]
