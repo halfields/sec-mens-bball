@@ -28,14 +28,14 @@ class SecMensBball::CLI
 		loop do
 		  puts "Enter a team's number to see its schedule or type exit to leave site"
 		  input = gets.strip 
-		  case input
-		  when "exit" 
+		  if input == "exit"
 		  	goodbye
-		  when 1..14
+		  	break
+		  elsif (1..14).cover?(input.to_i)
 		  	puts "You chose number #{input}" # do something
 		  	puts "Would you like to make another selection?"
 		  else
-		  	puts "type number 1 through 14 or 'exit' to leave program"
+		  	puts "Please type a number between 1 and 14."
 		  end
 		end
 	end
