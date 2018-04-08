@@ -7,16 +7,22 @@ class Scraper
 	def self.scrape_standings_page		
 		doc = Nokogiri::HTML(open("http://www.secsports.com/standings/mens-basketball"))
 		standings = doc.css("#wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody")
-		binding.pry
 		league = []
+		index = 0
 		standings.css("tr").each do |team_table|
+			index += 1
 			t = Team.new
 			t.name = team_table.css("a:first").text
 			t.url =  team_table.css("a:first").attr("href").text.strip
-			t.conf_record = team_table.css("#wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody > tr:nth-child(1) > td:nth-child(3)")
-			t.overall_record = team_table.css("#wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody > tr:nth-child(1) > td:nth-child(3)")
-			scrape_team_page(t.url)
+		#	t.conf_record = team_table.css("#wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody > tr:nth-child(1) > td:nth-child(2).text")
+		#	t.overall_record = team_table.css("#wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody > tr:nth-child(1) > td:nth-child(3).text")
+			t.conf_record = team_table.css("td")[1].text
+			t.overall_record = team_table.css("td")[2].text
+			league << t
+		#	binding.pry
 		end
+	#	binding.pry
+		league
 	end
 
 	def self.scrape_team_page(url)
@@ -39,4 +45,3 @@ end
 # row :  #wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody > tr:nth-child(2)
 # conf_record :  #wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody > tr:nth-child(2) > td:nth-child(2)
 # overall_record: #wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody > tr:nth-child(2) > td:nth-child(3)
-
