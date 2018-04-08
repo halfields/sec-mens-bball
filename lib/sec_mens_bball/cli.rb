@@ -1,17 +1,13 @@
+require 'pry'
+
 class SecMensBball::CLI
 
 	def call
 		welcome
-		display
+		display_league
 		choose
 	end
 	
-
-
-
-
-
-
 	def welcome
 		puts "Welcome to my Southeastern Conference Mens Basketball site."
 		puts "Here are the current league standings."
@@ -20,11 +16,11 @@ class SecMensBball::CLI
 		puts "----------------------------------------------------------------"
 	end
 
-	def display
+	def display_league
 		# puts " League record data " # Scraper.scrape_standings_page
-		standings = Scraper.scrape_standings_page
+		@standings = Scraper.scrape_standings_page
 		rank = 0
-		standings.each do |team|
+		@standings.each do |team|
 			rank += 1
 			print rank.to_s.rjust(2)
 			print team.name.rjust(20)
@@ -42,16 +38,27 @@ class SecMensBball::CLI
 		  	goodbye
 		  	break
 		  elsif (1..14).cover?(input.to_i)
-		  	puts "You chose number #{input}" # do something
-		  	puts "Would you like to make another selection?"
+		  	#puts "You chose number #{input}" # do something
+		  	#puts "Would you like to make another selection?"
+		  	Scraper.scrape_team_page(find_team_url(input))
 		  else
 		  	puts "Please type a number between 1 and 14."
 		  end
 		end
 	end
 
+	def display_team
+	end
+
 	def goodbye
 		puts "Goodbye. Come back soon!"
+	end
+
+	def find_team_url(input)
+		index = input.to_i - 1
+		team = @standings[index] 
+		team.url
+	#	binding.pry
 	end
 end
 

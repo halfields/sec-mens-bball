@@ -27,7 +27,15 @@ The welcome page presents a table of 14 SEC basketball teams and their data scra
 				     {school name => xxx},
 				     {conference record => xxx},
 				     {overall record => xxx},
-				     {team schedule page => url}
+				     {team clubhouse url => url}
 				     },
 			   ...	     
 			 ]
+
+	Individual school schedule websites are scraped and provide an array of hashes. 
+		-Each element of the array represents a game on the school's schedule
+		-Each game has the following attributes:
+			- game.date
+			- game.opponent
+			- game.result #result if already played (win or lose with the score of the game)
+						  #time of game if not yet played		 
