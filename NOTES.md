@@ -1,6 +1,6 @@
 
 
-user types: bball
+user types: bin/bball
 
 1. Welcome to the site
 	Present a number list of teams in league order, with league and overall records
@@ -38,4 +38,11 @@ The welcome page presents a table of 14 SEC basketball teams and their data scra
 			- game.date
 			- game.opponent
 			- game.result #result if already played (win or lose with the score of the game)
-						  #time of game if not yet played		 
+						  #time of game if not yet played
+
+for general reference, the url of the main page that is scraped is:
+	http://www.secsports.com/standings/mens-basketball
+
+an example url of a team schedule page that is scraped is:
+	http://www.secsports.com/schedule/mens-basketball/missouri-tigers
+

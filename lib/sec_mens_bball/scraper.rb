@@ -8,40 +8,61 @@ class Scraper
 		doc = Nokogiri::HTML(open("http://www.secsports.com/standings/mens-basketball"))
 		standings = doc.css("#wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody")
 		league = []
-		index = 0
 		standings.css("tr").each do |team_table|
-			index += 1
 			t = Team.new
 			t.name = team_table.css("a:first").text
 			t.url =  team_table.css("a:first").attr("href").text.strip
-		#	t.conf_record = team_table.css("#wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody > tr:nth-child(1) > td:nth-child(2).text")
-		#	t.overall_record = team_table.css("#wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody > tr:nth-child(1) > td:nth-child(3).text")
 			t.conf_record = team_table.css("td")[1].text
 			t.overall_record = team_table.css("td")[2].text
 			league << t
-		#	binding.pry
 		end
-	#	binding.pry
 		league
 	end
 
+
+method = <<EOM
 	def self.scrape_team_page(url)
-	#	binding.pry
+		t = Team.new
 		schedule_url =  ("http://www.secsports.com" + url).gsub("clubhouse", "schedule")
 		doc = Nokogiri::HTML(open(schedule_url))
-		names = []
-		doc.css("#wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody > tr").each do |opponent|
-			o = Team.new
-		#	binding.pry
-			o.name = opponent.css("td.col-xs-4.text-center > a").text.strip
-			names << o.name
-		end
-		names
-	#	binding.pry
+		schedule = doc.css("#wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody")
+		tgames = []		
+		schedule.css("tr").each do |game| 
+		  unless game.css("td")[0].text.strip == "* Game Played At Neutral Venue"
+			  g = Game.new
+			  g.date = game.css("td")[0].text
+			  g.opponent = game.css("td")[1].text  
+			  g.result = game.css("td")[2].text
+			  games << g
+		  end
+		end 
+		games
 	end
+end
+EOM
 
+def self.scrape_team_page(team)
+		schedule_url =  ("http://www.secsports.com" + team.url).gsub("clubhouse", "schedule")
+		doc = Nokogiri::HTML(open(schedule_url))
+		schedule = doc.css("#wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody")
+		team.games = []		
+		schedule.css("tr").each do |game| 
+		  unless game.css("td")[0].text.strip == "* Game Played At Neutral Venue"
+			  g = Game.new
+			  g.date = game.css("td")[0].text
+			  g.opponent = game.css("td")[1].text  
+			  g.result = game.css("td")[2].text
+			  team.games << g
+		  end
+		end 
+	end
 end
 
-# row :  #wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody > tr:nth-child(2)
-# conf_record :  #wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody > tr:nth-child(2) > td:nth-child(2)
-# overall_record: #wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody > tr:nth-child(2) > td:nth-child(3)
+
+
+
+
+
+
+
+
