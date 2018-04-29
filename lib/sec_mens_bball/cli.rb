@@ -14,7 +14,6 @@ class SecMensBball::CLI
 	end
 
 	def display_league
-		# puts " League record data " # Scraper.scrape_standings_page
 		puts
 		puts "No.            Team 	     League Record	 Overall Record"
 		puts "----------------------------------------------------------------"
@@ -70,7 +69,6 @@ class SecMensBball::CLI
 		index = input.to_i - 1
 		team = @standings[index] 
 		team.url
-	#	binding.pry
 	end
 end
 

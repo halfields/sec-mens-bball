@@ -19,28 +19,6 @@ class Scraper
 		league
 	end
 
-
-method = <<EOM
-	def self.scrape_team_page(url)
-		t = Team.new
-		schedule_url =  ("http://www.secsports.com" + url).gsub("clubhouse", "schedule")
-		doc = Nokogiri::HTML(open(schedule_url))
-		schedule = doc.css("#wrapper > div > main > section > div > section > div > div > div > div.panel-body > div > table > tbody")
-		tgames = []		
-		schedule.css("tr").each do |game| 
-		  unless game.css("td")[0].text.strip == "* Game Played At Neutral Venue"
-			  g = Game.new
-			  g.date = game.css("td")[0].text
-			  g.opponent = game.css("td")[1].text  
-			  g.result = game.css("td")[2].text
-			  games << g
-		  end
-		end 
-		games
-	end
-end
-EOM
-
 def self.scrape_team_page(team)
 		schedule_url =  ("http://www.secsports.com" + team.url).gsub("clubhouse", "schedule")
 		doc = Nokogiri::HTML(open(schedule_url))
