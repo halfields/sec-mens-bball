@@ -9,8 +9,10 @@ class SecMensBball::CLI
 	end
 	
 	def welcome
+		puts
 		puts "Welcome to my Southeastern Conference Mens Basketball site."
 		puts "Here are the current league standings."
+		puts
 	end
 
 	def display_league
