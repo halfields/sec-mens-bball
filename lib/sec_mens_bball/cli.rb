@@ -1,6 +1,6 @@
 require 'pry'
 
-class SecMensBball::CLI
+class CLI
 
 	def call
 		welcome
