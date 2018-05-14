@@ -20,7 +20,19 @@ Or install it yourself as:
 
 ## Usage
 
-After installation, go to the directory the gem was installed in and enter "bin/bball". The current Southeastern Conference Mens' Basketball Standings is then displayed in rank order from 1-14. Enter the number of a team to display that teams season's schedule. Included in the display is the game's date, matchup, and result, if game has already been played and time, if game is yet to be played. Matchup includes opponents name and whether the game is home (vs) or away (@). Result includes win or loss and the score. Once a number has been entered to see a team's season schedule, enter another number to see a different team's schedule. Enter the word "league" to see the league standings again, and enter 'exit' to leave.
+To run the code in terminal:
+
+Open IRB
+
+Require the gem with:
+`require "sec_mens_bball"
+
+Launch the gem with:
+`CLI.new.call`
+
+To run the code in a ruby file, add `require "sec_mens_bball"` to the top of the file and `CLI.new.call` to the body, then execute the file.
+
+Once the program is running, the current Southeastern Conference Mens' Basketball Standings will then be displayed in rank order from 1-14. Enter the number of a team to display that teams season's schedule. Included in the display is the game's date, matchup, and result, if game has already been played and time, if game is yet to be played. Matchup includes opponents name and whether the game is home (vs) or away (@). Result includes win or loss and the score. Once a number has been entered to see a team's season schedule, enter another number to see a different team's schedule. Enter the word "league" to see the league standings again, and enter 'exit' to leave.
 
 ## Development
 
