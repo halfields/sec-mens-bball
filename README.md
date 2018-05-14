@@ -1,8 +1,6 @@
 # SecMensBball
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/sec_mens_bball`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to SecMensBball. This gem displays the current mens' basketball standings in the Southeastern Conference. It ranks the teams (1-14) by conference record, and also gives the teams' overall record. Select a particular team and it displays a team page that has the scheduling data for that teams entire season, including dates, opponents, and the score if the game has already been played.
 
 ## Installation
 
@@ -22,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+After installation, go to the directory the gem was installed in and enter "bin/bball". The current Southeastern Conference Mens' Basketball Standings is then displayed in rank order from 1-14. Enter the number of a team to display that teams season's schedule. Included in the display is the game's date, matchup, and result, if game has already been played and time, if game is yet to be played. Matchup includes opponents name and whether the game is home (vs) or away (@). Result includes win or loss and the score. Once a number has been entered to see a team's season schedule, enter another number to see a different team's schedule. Enter the word "league" to see the league standings again, and enter 'exit' to leave.
 
 ## Development
 

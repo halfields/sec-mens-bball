@@ -1,7 +1,10 @@
 #!/usr/bin/env ruby
 
+#run Bundler and setup my gems and their dependencies
 require "bundler/setup"
+
+#require the file that contains all my other requires
 require "sec_mens_bball"
 
-
+#start the CLI gem
 CLI.new.call
