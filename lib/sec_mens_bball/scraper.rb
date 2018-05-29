@@ -36,6 +36,7 @@ def self.scrape_team_page(team)
 			  g.opponent = game.css("td")[1].text  
 			  g.result = game.css("td")[2].text
 			  team.games << g
+
 		  end
 		end 
 	end

@@ -4,7 +4,9 @@ class CLI
 
 	def call
 		#give a brief welcoming statement, then display the latest league standings, then prompt for a team choice
-		welcome
+		welcome 
+		# scrape the entire standings page
+		@standings = Scraper.scrape_standings_page
 		display_league
 		choose
 	end
@@ -21,10 +23,8 @@ class CLI
 		puts
 		puts "No.            Team 	     League Record	 Overall Record"
 		puts "----------------------------------------------------------------"
-		# scrape the entire standings page
-		@standings = Scraper.scrape_standings_page
 		rank = 0
-		#go through each line of the standings and build a team object
+		#go through each line of the standings and add a piece of data to the team object
 		@standings.each do |team|
 			rank += 1
 			#print out team information with proper formatting to make info align
@@ -48,8 +48,14 @@ class CLI
 		  	goodbye
 		  	break
 		  elsif (1..14).cover?(input.to_i) #change string input to an integer and check to see the number is between 1 and 14
-		  	team = @standings[input.to_i - 1] # @standings is an array of previously scraped team objects
-		  	Scraper.scrape_team_page(team) # scrape the team page that corresponds to the input number
+		  	team = @standings[input.to_i - 1] # @standings is an array of previously scraped team objects 
+		  	if !team.games
+		  		puts "Scraping team page for the first time"
+		  	  Scraper.scrape_team_page(team)  # scrape the team page that corresponds to the input number, but only if it hasn't already been scraped this session.
+				else
+					puts "This team page has already been scraped this session" 
+					puts "I'm not going to scrape it again!"
+				end
 		  	display_team_schedule(team)	#display the schedule attributes of the input team
 		  elsif input == "league"	# if 'league' call 'display_league' method to display the standings of the league
 		  	display_league  	
@@ -65,13 +71,13 @@ class CLI
 		puts
 		puts "#{team.name} Men's Basketball Team Schedule 2018"
 		puts "   Date                    Matchup         Result/Time "
-		puts "--------------------------------------------------------"
+		puts "--------------------------------------------------------" 
 		team.games.each do |game| # print each game on a teams schedule
 		  print game.date.rjust(13) 
 		  print game.opponent.rjust(25)
 		  puts game.result.rjust(15) 
-		end
-		puts "* Game Played At Neutral Venue" # print this line to explain the asterisks that show up in the schedule
+		end 
+	  puts "* Game Played At Neutral Venue" # print this line to explain the asterisks that show up in the schedule
 	end
 
 	def goodbye

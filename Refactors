@@ -1,0 +1,15 @@
+Refactors
+
+1. Persist information (standings, teams, their games) so that they aren't scraped multiple times
+
+User requests information
+First, check if it exists
+If so, display it
+If not, scrape it, persist it to the appropriate class variable, and display it
+
+Your cli class should be referring to class finder methods
+Example: 
+User inputs for Missourie
+
+In the Team class, build a method called .find_by_team
+Team.all.select {|t| t.name = name}
